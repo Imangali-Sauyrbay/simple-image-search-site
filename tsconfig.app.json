@@ -12,7 +12,10 @@
       "@headers/*": ["./src/components/headers/*"],
       "@icons/*": ["./src/components/icons/*"],
       "@assets/*": ["./src/assets/*"],
-      "@pages/*": ["./src/pages/*"]
+      "@pages/*": ["./src/pages/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@services/*": ["./src/services/*"],
+      "@dummyServices/*": ["./src/dummyServices/*"]
     }
   }
 }

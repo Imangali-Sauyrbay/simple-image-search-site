@@ -9,14 +9,14 @@ const router = createRouter({
       component: () => import('@pages/IndexPage.vue')
     },
     {
-      path: '/favorites',
-      name: 'favorites',
-      component: () => import('@pages/IndexPage.vue')
+      path: '/favourites',
+      name: 'favourites',
+      component: () => import('@pages/FavouritesPage.vue')
     },
     {
       path: '/photo/:id',
       name: 'photo',
-      component: () => import('@pages/IndexPage.vue')
+      component: () => import('@pages/PhotoPage.vue')
     }
   ]
 })
