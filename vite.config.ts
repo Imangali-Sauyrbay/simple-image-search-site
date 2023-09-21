@@ -11,6 +11,11 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '@components': fileURLToPath(new URL('./src/components', import.meta.url)),
+      '@headers': fileURLToPath(new URL('./src/components/headers', import.meta.url)),
+      '@ui': fileURLToPath(new URL('./src/components/UI', import.meta.url)),
+      '@icons': fileURLToPath(new URL('./src/components/icons', import.meta.url)),
+      '@assets': fileURLToPath(new URL('./src/assets', import.meta.url)),
       '@pages': fileURLToPath(new URL('./src/pages', import.meta.url))
     },
 
