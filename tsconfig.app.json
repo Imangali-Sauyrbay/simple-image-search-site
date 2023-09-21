@@ -8,11 +8,13 @@
     "paths": {
       "@/*": ["./src/*"],
       "@components/*": ["./src/components/*"],
+      "@composables/*": ["./src/composables/*"],
       "@ui/*": ["./src/components/UI/*"],
       "@headers/*": ["./src/components/headers/*"],
       "@icons/*": ["./src/components/icons/*"],
       "@assets/*": ["./src/assets/*"],
       "@pages/*": ["./src/pages/*"],
+      "@layouts/*": ["./src/layouts/*"],
       "@utils/*": ["./src/utils/*"],
       "@services/*": ["./src/services/*"],
       "@dummyServices/*": ["./src/dummyServices/*"]

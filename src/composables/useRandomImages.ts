@@ -1,6 +1,6 @@
 import { computed } from 'vue'
-import unsplashService from "@/services/unsplashService"
-import { useQuery } from "@tanstack/vue-query"
+import unsplashService from '@/services/unsplashService'
+import { useQuery } from '@tanstack/vue-query'
 import { getRandomImages } from '@dummyServices/randomImages'
 
 export const KEY = ['random_images']
@@ -10,6 +10,7 @@ export const useRandomImages = () => {
         queryKey: KEY,
         queryFn: () => unsplashService.photos.getRandom({
             count: 9,
+            orientation: 'portrait'
         })
     })
 
@@ -35,8 +36,10 @@ export const useDummyRandomImages = () => {
         queryFn: () => getRandomImages()
     })
 
+    const images = computed(() => query.data.value?.response || [])
+
     return {
         query,
-        images: query.data.value?.response || []
+        images
     }
 }

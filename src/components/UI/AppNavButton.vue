@@ -9,7 +9,7 @@ defineProps<{
     <div class="h-6 w-6 text-white transition group-hover:scale-110 group-active:scale-95">
       <slot></slot>
     </div>
-    <span class="hidden text-lg text-white lg:inline-block">
+    <span class="hidden text-lg text-white md:inline-block">
       {{ text }}
     </span>
   </button>

@@ -12,7 +12,9 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
       '@components': fileURLToPath(new URL('./src/components', import.meta.url)),
+      '@composables': fileURLToPath(new URL('./src/composables', import.meta.url)),
       '@headers': fileURLToPath(new URL('./src/components/headers', import.meta.url)),
+      '@layouts': fileURLToPath(new URL('./src/layouts', import.meta.url)),
       '@services': fileURLToPath(new URL('./src/services', import.meta.url)),
       '@dummyServices': fileURLToPath(new URL('./src/dummyServices', import.meta.url)),
       '@utils': fileURLToPath(new URL('./src/utils', import.meta.url)),

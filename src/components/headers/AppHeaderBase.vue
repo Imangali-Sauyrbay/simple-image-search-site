@@ -9,12 +9,12 @@ import { RouterLink } from 'vue-router';
             <RouterLink :to="{name: 'home'}">
                 <img
                     alt="Logo"
-                    class="w-20 lg:w-28 2xl:w-44"
+                    class="w-20 md:w-28 2xl:w-44"
                     src="@assets/logo.svg"
                 />
             </RouterLink>
 
-            <nav class="flex items-center justify-center gap-5 lg:gap-9">
+            <nav class="flex items-center justify-center gap-5 md:gap-9">
                 <slot name="nav"></slot>
             </nav>
         </div>

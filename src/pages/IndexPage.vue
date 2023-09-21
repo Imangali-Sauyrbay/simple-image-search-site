@@ -1,17 +1,20 @@
 <script lang="ts" setup>
 import AppHeader from '@headers/AppPrimaryHeader.vue'
 import AppRenderImageList from '@ui/AppRenderImageList.vue'
-import { useRandomImages } from '@/composables/useRandomImages'
+import AppLoader from '@ui/AppLoader.vue'
+import DefaultLayout from '@layouts/DefaultLayout.vue'
+import { useDummyRandomImages } from '@/composables/useRandomImages'
 
 const {
-    images,
-    query: {
-        data
-    }
-} = useRandomImages()
+  images,
+  query: { data, isLoading, isSuccess }
+} = useDummyRandomImages()
 </script>
 
 <template>
-  <AppHeader />
-  <AppRenderImageList v-if="data?.type === 'success'" :images="images"/>
+    <DefaultLayout>
+        <AppHeader />
+        <AppRenderImageList v-if="isSuccess && data?.type === 'success'" :images="images" />
+        <AppLoader v-if="isLoading" />
+    </DefaultLayout>
 </template>

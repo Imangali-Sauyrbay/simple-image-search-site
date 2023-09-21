@@ -19,11 +19,15 @@ defineProps<{
 
 <template>
   <AppImageTileWrapper class="mx-auto mb-10 mt-11 lg:mt-24">
-    <AppSquareImage
+    <router-link
       v-for="image in images"
       :key="image.id"
-      :placeholderSrc="image.urls.thumb"
-      :src="image.urls.regular"
-    />
+      :to="{name: 'photo', params: {id: image.id}}"
+    >
+      <AppSquareImage
+        :placeholderSrc="image.urls.thumb"
+        :src="image.urls.regular"
+      />
+    </router-link>
   </AppImageTileWrapper>
 </template>
