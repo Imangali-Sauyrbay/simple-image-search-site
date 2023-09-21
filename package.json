@@ -18,6 +18,7 @@
     "pinia-plugin-persistedstate": "^3.2.0",
     "unsplash-js": "^7.0.18",
     "vue": "^3.3.4",
+    "vue-progressive-image": "^4.0.0",
     "vue-router": "^4.2.4",
     "whatwg-fetch": "^3.6.19"
   },

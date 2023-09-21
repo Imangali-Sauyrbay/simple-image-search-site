@@ -15,7 +15,7 @@ const handleInput = (e: Event) => {
 
 <template>
   <div
-    class="mx-6 box-content flex w-full max-w-4xl border-blue-600 bg-white px-8 shadow-md shadow-black/70 transition-all duration-300 focus-within:border"
+    class="z-10 mx-6 box-content flex w-full max-w-4xl border-blue-600 bg-white px-8 shadow-md shadow-black/70 transition-all duration-300 focus-within:border"
   >
     <input
       class="h-16 w-full outline-none"

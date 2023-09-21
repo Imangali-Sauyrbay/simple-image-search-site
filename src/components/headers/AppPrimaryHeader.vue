@@ -16,7 +16,7 @@ import FavouritePageLink from '@components/Links/FavouritePageLink.vue'
   </AppHeader>
 
   <div
-    class="flex h-60 w-full items-center justify-center bg-[url('/images/starry-night.jpg')] bg-cover bg-[center_top_65%] bg-no-repeat lg:h-64"
+    class="relative flex h-60 w-full items-center justify-center bg-[url('/images/starry-night.jpg')] bg-cover bg-[center_top_80%] bg-no-repeat lg:h-64"
   >
     <AppSearchBar placeholder="Search">
       <template #icon>
@@ -27,6 +27,7 @@ import FavouritePageLink from '@components/Links/FavouritePageLink.vue'
         </div>
       </template>
     </AppSearchBar>
+    <div class="absolute inset-0 bg-black/50"></div>
   </div>
 
   <AppDivider />
