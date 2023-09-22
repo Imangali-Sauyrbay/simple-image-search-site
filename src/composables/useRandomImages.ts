@@ -10,7 +10,7 @@ export const useRandomImages = () => {
         queryKey: KEY,
         queryFn: () => unsplashService.photos.getRandom({
             count: 9,
-            orientation: 'portrait'
+            orientation: 'landscape'
         })
     })
 
