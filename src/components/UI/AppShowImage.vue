@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+import { computed } from 'vue'
 import Avatar from './ShowImageParts/Avatar.vue'
 import UsernameInfo from './ShowImageParts/UsernameInfo.vue'
 import BGImage from './ShowImageParts/BGImage.vue'
@@ -9,34 +9,24 @@ import HeartButton from './ShowImageParts/HeartButton.vue'
 import DownloadButton from './ShowImageParts/DownloadButton.vue'
 import { useFileDownloader } from '@/composables/useFileDownloader'
 import { useFavouritesStore } from '@/stores/favourites'
-import { computed } from 'vue'
+import type { ImageDataResponse } from '@services/unsplashService'
 
 const props = defineProps<{
-  id: string
-  background: string
-  src: string
-  srcFull: string
-  placeholderSrc: string
-  portfolioSrc: string
-  portfolioSrcPlaceholder: string
-  name: string
-  username: string
-  portfolioUrl: string
-  alt?: string
+  data: ImageDataResponse
 }>()
 
 const { handleDownload, isLoadingFile } = useFileDownloader()
 const favouritesStore = useFavouritesStore()
 
-const isFavourite = computed(() => favouritesStore.hasFavourite(props.id))
+const isFavourite = computed(() => favouritesStore.hasFavourite(props.data.id))
 
 const handleTogleFav = () => {
   favouritesStore.toggleFav({
-    id: props.id,
-    alt: props.alt,
+    id: props.data.id,
+    alt_description: props.data.alt_description,
     urls: {
-      regular: props.src,
-      thumb: props.portfolioSrc
+      regular: props.data.urls.regular,
+      thumb: props.data.urls.thumb
     }
   })
 }
@@ -47,7 +37,7 @@ const handleTogleFav = () => {
 
     <BGImage
         class="hidden sm:block"
-        :background="background"
+        :background="data.urls.small"
     />
 
     <div
@@ -55,23 +45,23 @@ const handleTogleFav = () => {
     >
       <div class="flex">
         <Avatar
-            :portfolio-src="portfolioSrc"
-            :portfolio-src-placeholder="portfolioSrcPlaceholder"
+            :portfolio-src="data.user.profile_image.large"
+            :portfolio-src-placeholder="data.user.profile_image.small"
         />
 
         <UsernameInfo
-            :portfolio-url="portfolioUrl"
-            :name="name"
-            :username="username"
+            :portfolio-url="data.user.portfolio_url || '#'"
+            :name="data.user.name"
+            :username="data.user.username"
         />
       </div>
 
       <div class="flex gap-4">
         <HeartButton :filled="isFavourite" @click="handleTogleFav"/>
-        <DownloadButton @click="handleDownload(srcFull)" :isLoading="isLoadingFile"/>
+        <DownloadButton @click="handleDownload(data.urls.full)" :isLoading="isLoadingFile"/>
       </div>
     </div>
 
-    <CenteredImage :src="src" :alt="alt"/>
+    <CenteredImage :src="data.urls.regular" :alt="data.alt_description"/>
   </div>
 </template>

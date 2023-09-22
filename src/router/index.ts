@@ -17,6 +17,11 @@ const router = createRouter({
       path: '/photo/:id',
       name: 'photo',
       component: () => import('@pages/PhotoPage.vue')
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: () => import('@pages/SearchPage.vue')
     }
   ]
 })

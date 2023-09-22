@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import type { Nullable } from 'unsplash-js/dist/helpers/typescript'
 
 type Urls = {
     thumb: string
@@ -8,7 +9,7 @@ type Urls = {
 export type Image = {
     id: string
     urls: Urls
-    alt?: string
+    alt_description?: Nullable<string>
 }
 
 type FavouritesState = {
