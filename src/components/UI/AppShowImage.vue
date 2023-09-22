@@ -8,11 +8,15 @@ import CenteredImage from './ShowImageParts/CenteredImage.vue'
 import HeartButton from './ShowImageParts/HeartButton.vue'
 import DownloadButton from './ShowImageParts/DownloadButton.vue'
 import { useFileDownloader } from '@/composables/useFileDownloader'
+import { useFavouritesStore } from '@/stores/favourites'
+import { computed } from 'vue'
 
-defineProps<{
+const props = defineProps<{
+  id: string
   background: string
   src: string
   srcFull: string
+  placeholderSrc: string
   portfolioSrc: string
   portfolioSrcPlaceholder: string
   name: string
@@ -22,6 +26,20 @@ defineProps<{
 }>()
 
 const { handleDownload, isLoadingFile } = useFileDownloader()
+const favouritesStore = useFavouritesStore()
+
+const isFavourite = computed(() => favouritesStore.hasFavourite(props.id))
+
+const handleTogleFav = () => {
+  favouritesStore.toggleFav({
+    id: props.id,
+    alt: props.alt,
+    urls: {
+      regular: props.src,
+      thumb: props.portfolioSrc
+    }
+  })
+}
 </script>
 
 <template>
@@ -49,7 +67,7 @@ const { handleDownload, isLoadingFile } = useFileDownloader()
       </div>
 
       <div class="flex gap-4">
-        <HeartButton />
+        <HeartButton :filled="isFavourite" @click="handleTogleFav"/>
         <DownloadButton @click="handleDownload(srcFull)" :isLoading="isLoadingFile"/>
       </div>
     </div>

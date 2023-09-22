@@ -31,16 +31,18 @@ onMounted(() => {
   <DefaultLayout>
     <AppHeader remove-divider />
     <AppShowImage
-        v-if="isSuccess && !isFetching"
-        :src="data?.urls.regular || ''"
-        :srcFull="data?.urls.full || ''"
-        :background="data?.urls.small || ''"
-        :name="data?.user.name || ''"
-        :username="data?.user.username|| ''"
-        :portfolioUrl="data?.user.portfolio_url || ''"
-        :portfolioSrc="data?.user.profile_image.large || ''"
-        :portfolioSrcPlaceholder="data?.user.profile_image.small || ''"
-        :alt="data?.alt_description"
+        v-if="isSuccess && !isFetching && data?.type === 'success'"
+        :id="id"
+        :placeholder-src="data.response.urls.thumb || ''"
+        :src="data.response.urls.regular || ''"
+        :srcFull="data.response.urls.full || ''"
+        :background="data.response.urls.small || ''"
+        :name="data.response.user.name || ''"
+        :username="data.response.user.username|| ''"
+        :portfolioUrl="data.response.user.portfolio_url || ''"
+        :portfolioSrc="data.response.user.profile_image.large || ''"
+        :portfolioSrcPlaceholder="data.response.user.profile_image.small || ''"
+        :alt="data.response.alt_description || ''"
     />
     <AppLoader v-if="isLoading || isFetching" />
   </DefaultLayout>

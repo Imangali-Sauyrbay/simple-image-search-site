@@ -5,7 +5,7 @@ import AppNavButton from '@ui/AppNavButton.vue'
 
 <template>
   <router-link :to="{ name: 'favourites' }">
-    <AppNavButton text="Favourites">
+    <AppNavButton text="Favourites" icon-size="lg">
       <IconHeart />
     </AppNavButton>
   </router-link>

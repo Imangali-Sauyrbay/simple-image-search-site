@@ -1,24 +1,15 @@
 <script lang="ts" setup>
 import AppSquareImage from '@ui/AppSquareImage.vue'
 import AppImageTileWrapper from '@ui/AppImageTileWrapper.vue'
-
-type Urls = {
-  thumb: string
-  regular: string
-}
-
-type Images = {
-  id: string
-  urls: Urls
-}
+import {type Image} from '@/stores/favourites'
 
 defineProps<{
-  images: Images[]
+  images: Image[]
 }>()
 </script>
 
 <template>
-  <AppImageTileWrapper class="mx-auto mb-10 mt-11 lg:mt-24">
+  <AppImageTileWrapper class="mx-auto">
     <router-link
       v-for="image in images"
       :key="image.id"

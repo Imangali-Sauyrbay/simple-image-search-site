@@ -12,9 +12,13 @@ const {
 </script>
 
 <template>
-    <DefaultLayout>
-        <AppHeader />
-        <AppRenderImageList v-if="isSuccess && data?.type === 'success'" :images="images" />
-        <AppLoader v-if="isLoading" />
-    </DefaultLayout>
+  <DefaultLayout>
+    <AppHeader />
+    <AppRenderImageList
+      v-if="isSuccess && data?.type === 'success'"
+      :images="images"
+      class="mb-10 mt-11 lg:mt-24"
+    />
+    <AppLoader v-if="isLoading" />
+  </DefaultLayout>
 </template>
