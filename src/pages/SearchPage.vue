@@ -51,7 +51,7 @@ const { scrollHandler } = useInfiniteScroll({
     <h3 v-else-if="!isFetching" class="my-5 text-center text-lg font-bold text-gray-600">
       Sorry, But there is no Photo!
     </h3>
-    <AppError v-if="(!isSuccess && !isLoading) || (!isLoading && images.length <= 0) || isError" />
+    <AppError v-if="(!isLoading && !isFetching && images.length <= 0) || isError" />
     <AppLoader v-if="isFetching || isLoading" />
   </DefaultLayout>
 </template>
