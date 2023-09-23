@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import AppHeader from '@headers/AppPrimaryHeader.vue'
 import AppRenderImageList from '@ui/AppRenderImageList.vue'
+import AppError from '@ui/AppError.vue'
 import AppLoader from '@ui/AppLoader.vue'
 import DefaultLayout from '@layouts/DefaultLayout.vue'
 import { useSearchRouter } from '@composables/useSearchRouter'
@@ -15,7 +16,8 @@ const query = computed<string>(() =>
   Array.isArray(route.query.q) ? route.query.q.join(' ') : route.query.q || ''
 )
 
-const { data, hasNextPage, fetchNextPage, isFetching, isSuccess, isLoading } = useInfiniteSearch(query)
+const { data, hasNextPage, fetchNextPage, isFetching, isSuccess, isLoading, isError } =
+  useInfiniteSearch(query)
 
 const client = useQueryClient()
 watch(
@@ -74,7 +76,7 @@ const scrollHandler = (e: UIEvent) => {
     <h3 v-else-if="!isFetching" class="my-5 text-center text-lg font-bold text-gray-600">
       Sorry, But there is no Photo!
     </h3>
-    <AppError v-if="!isSuccess && !isLoading && images.length <= 0" />
+    <AppError v-if="(!isSuccess && !isLoading) || (!isLoading && images.length <= 0) || isError" />
     <AppLoader v-if="isFetching || isLoading" />
   </DefaultLayout>
 </template>

@@ -8,7 +8,7 @@ import { useRandomImages } from '@composables/useRandomImages'
 import { useSearchRouter } from '@composables/useSearchRouter'
 const {
   images,
-  query: { data, isLoading, isSuccess }
+  query: { data, isLoading, isSuccess, isError }
 } = useRandomImages()
 
 const { handleSearch } = useSearchRouter()
@@ -23,6 +23,6 @@ const { handleSearch } = useSearchRouter()
       class="mb-12 mt-11 lg:mt-24"
     />
     <AppLoader v-if="isLoading" />
-    <AppError v-if="!isSuccess && !isLoading && data?.type === 'error'" />
+    <AppError v-if="(!isSuccess && !isLoading) || (!isLoading && images.length <= 0) || isError" />
   </DefaultLayout>
 </template>

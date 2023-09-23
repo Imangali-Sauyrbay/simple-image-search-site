@@ -3,6 +3,7 @@ import { computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import AppHeader from '@headers/AppHeaderThin.vue'
 import AppLoader from '@ui/AppLoader.vue'
+import AppError from '@ui/AppError.vue'
 import AppShowImage from '@ui/AppShowImage.vue'
 import DefaultLayout from '@layouts/DefaultLayout.vue'
 import { useImageById } from '@/composables/useImageById'
@@ -14,7 +15,7 @@ const id = computed(() =>
   Array.isArray(route.params.id) ? route.params.id.join('') : route.params.id
 )
 
-const { data, isLoading, isSuccess, isFetching } = useImageById(id)
+const { data, isLoading, isSuccess, isFetching, isError } = useImageById(id)
 
 onMounted(() => {
   if (!id.value) return router.push({ name: 'home' })
@@ -29,6 +30,6 @@ onMounted(() => {
       :data="data.response"
     />
     <AppLoader v-if="isLoading || isFetching" />
-    <AppError v-if="!isSuccess && !isLoading && data?.type === 'error'" />
+    <AppError v-if="(!isSuccess && !isLoading) || (!isLoading && data?.type === 'error') || isError" />
   </DefaultLayout>
 </template>
