@@ -5,64 +5,39 @@ import AppError from '@ui/AppError.vue'
 import AppLoader from '@ui/AppLoader.vue'
 import DefaultLayout from '@layouts/DefaultLayout.vue'
 import { useSearchRouter } from '@composables/useSearchRouter'
-import { useInfiniteSearch, KEY } from '@composables/useInfiniteSearch'
+import { useInfiniteSearch } from '@composables/useInfiniteSearch'
+import { useInfiniteScroll } from '@composables/useInfiniteScroll'
 import { useRoute } from 'vue-router'
 import { computed, watch } from 'vue'
-import { type Image } from '@/stores/favourites'
-import { useQueryClient } from '@tanstack/vue-query'
 
 const route = useRoute()
 const query = computed<string>(() =>
   Array.isArray(route.query.q) ? route.query.q.join(' ') : route.query.q || ''
 )
 
-const { data, hasNextPage, fetchNextPage, isFetching, isSuccess, isLoading, isError } =
-  useInfiniteSearch(query)
+const {
+  images,
+  invalidate,
+  query: { hasNextPage, fetchNextPage, isFetching, isSuccess, isLoading, isError }
+} = useInfiniteSearch(query)
 
-const client = useQueryClient()
 watch(
   () => query.value,
   () => {
-    client.invalidateQueries({
-      queryKey: KEY
-    })
+    invalidate()
   }
 )
 
-const images = computed<Image[]>(() => {
-  return (
-    data.value?.pages.reduce<Image[]>((acc, item) => {
-      if (item.type === 'success') {
-        item.response.results.forEach((res) => {
-          acc.push({
-            id: res.id,
-            urls: res.urls,
-            alt_description: res.alt_description || ''
-          })
-        })
-      }
-      return acc
-    }, []) || []
-  )
-})
 const { handleSearch } = useSearchRouter()
 
-const scrollHandler = (e: UIEvent) => {
-  const target: HTMLDivElement = e.target as HTMLDivElement
-
-  const scrollHeight = target.scrollHeight
-  const scrollTop = target.scrollTop
-  const innerHeight = window.innerHeight
-
-  if (
-    scrollHeight - (scrollTop + innerHeight) < 200 &&
-    !isFetching.value &&
-    !!hasNextPage?.value &&
-    images.value.length > 0
-  ) {
-    fetchNextPage()
+const { scrollHandler } = useInfiniteScroll({
+  distance: 200,
+  toNextPage: () => {
+    if (!isFetching.value && !!hasNextPage?.value && images.value.length > 0) {
+      fetchNextPage()
+    }
   }
-}
+})
 </script>
 
 <template>
